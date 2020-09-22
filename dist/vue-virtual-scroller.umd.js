@@ -1754,17 +1754,17 @@
       this.$_forceNextVScrollUpdate = null;
       this.updateWatchData();
 
+      var _loop = function _loop(k) {
+        _this.$watch(function () {
+          return _this.sizeDependencies[k];
+        }, _this.onDataUpdate);
+      };
+
+      for (var k in this.sizeDependencies) {
+        _loop(k);
+      }
+
       if (!this.vscrollResizeObserver) {
-        var _loop = function _loop(k) {
-          _this.$watch(function () {
-            return _this.sizeDependencies[k];
-          }, _this.onDataUpdate);
-        };
-
-        for (var k in this.sizeDependencies) {
-          _loop(k);
-        }
-
         this.vscrollParent.$on('vscroll:update', this.onVscrollUpdate);
         this.vscrollParent.$on('vscroll:update-size', this.onVscrollUpdateSize);
       }

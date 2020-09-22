@@ -104,11 +104,11 @@ export default {
     this.$_forceNextVScrollUpdate = null
     this.updateWatchData()
 
-    if (!this.vscrollResizeObserver) {
-      for (const k in this.sizeDependencies) {
-        this.$watch(() => this.sizeDependencies[k], this.onDataUpdate)
-      }
+    for (const k in this.sizeDependencies) {
+      this.$watch(() => this.sizeDependencies[k], this.onDataUpdate)
+    }
 
+    if (!this.vscrollResizeObserver) {
       this.vscrollParent.$on('vscroll:update', this.onVscrollUpdate)
       this.vscrollParent.$on('vscroll:update-size', this.onVscrollUpdateSize)
     }
